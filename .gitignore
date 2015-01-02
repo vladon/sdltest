@@ -258,3 +258,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 *.suo
+sdltest.v12.suo
