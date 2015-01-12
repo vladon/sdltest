@@ -1,6 +1,5 @@
 // Use SDL and standard IO
 #include <SDL.h>
-#include <SDL
 #include <stdio.h>
 #include <curl\curl.h>
 
