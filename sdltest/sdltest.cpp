@@ -38,6 +38,10 @@ bool init()
 		else
 		{
 			gSurface = SDL_GetWindowSurface(gWindow);
+
+			SDL_FillRect(gSurface, NULL, SDL_MapRGB(gSurface->format, 0xFF, 0xFF, 0xFF));
+
+			SDL_UpdateWindowSurface(gWindow);
 		}
 	}
 
