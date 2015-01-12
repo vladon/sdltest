@@ -35,7 +35,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -257,7 +258,9 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
 *.suo
+*.v12.suo
 sdltest.v12.suo
-sdltest.v12.suo
-sdltest.v12.suo
+sdltest\Debug\sdltest.tlog\*
+vc120.idb
