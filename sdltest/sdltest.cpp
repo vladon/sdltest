@@ -332,6 +332,11 @@ void close()
 	SDL_Quit();
 }
 
+void loadExchangeRates()
+{
+	// curl
+}
+
 int main(int argc, char* args[])
 {
 	//Start up SDL and create window
@@ -364,6 +369,11 @@ int main(int argc, char* args[])
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
+					}
+
+					if (e.type == SDL_MOUSEBUTTONDOWN)
+					{
+						loadExchangeRates();
 					}
 				}
 
