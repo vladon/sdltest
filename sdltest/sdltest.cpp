@@ -7,7 +7,10 @@ and may not be redistributed without written permission.*/
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
 #include <cmath>
+#include <curl/curl.h>
+#include <curl/easy.h>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -332,9 +335,20 @@ void close()
 	SDL_Quit();
 }
 
+static size_t CurlWriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{
+	((std::string*)userp)->append((char*)contents, size * nmemb);
+	return size * nmemb;
+}
+
 void loadExchangeRates()
 {
 	// curl
+	CURL *curl;
+	CURLcode res;
+	std::string readBuffer;
+
+	curl = curl_easy_init();
 }
 
 int main(int argc, char* args[])
