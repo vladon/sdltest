@@ -6,8 +6,10 @@
 #include <string>
 #include <iostream>
 #include <cmath>
-#include <curl/curl.h>
-#include <curl/easy.h>
+#include <curlpp/cURLpp.hpp>
+#include <curlpp/Easy.hpp>
+#include <curlpp/Options.hpp>
+#include <curlpp/Exception.hpp>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -340,12 +342,7 @@ static size_t CurlWriteCallback(void *contents, size_t size, size_t nmemb, void 
 
 void loadExchangeRates()
 {
-	// curl
-	CURL *curl;
-	CURLcode res;
-	std::string readBuffer;
 
-	curl = curl_easy_init();
 }
 
 int main(int argc, char* args[])
