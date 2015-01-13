@@ -97,6 +97,7 @@
     <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
     <Import Project="..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets" Condition="Exists('..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets')" />
     <Import Project="..\packages\curlpp.0.7.3.1\build\native\curlpp.targets" Condition="Exists('..\packages\curlpp.0.7.3.1\build\native\curlpp.targets')" />
+    <Import Project="..\packages\boost.1.57.0.0\build\native\boost.targets" Condition="Exists('..\packages\boost.1.57.0.0\build\native\boost.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -118,5 +119,6 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets'))" />
     <Error Condition="!Exists('..\packages\curlpp.0.7.3.1\build\native\curlpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curlpp.0.7.3.1\build\native\curlpp.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.57.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.57.0.0\build\native\boost.targets'))" />
   </Target>
 </Project>
