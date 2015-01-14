@@ -5,13 +5,16 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include <curl/curl.h>
 #include <curl/easy.h>
+#include <Windows.h>
+#include <tinyxml2.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 600;
+const int SCREEN_HEIGHT = 800;
 
 //Texture wrapper class
 class LTexture
@@ -285,13 +288,135 @@ bool init()
 	return success;
 }
 
+#define MAX_FILE_SIZE 10485760 //10 MiB
+
+size_t curl_to_string(void *ptr, size_t size, size_t count, void *stream)
+{
+	if (((std::string*)stream)->size() + (size * count) > MAX_FILE_SIZE)
+	{
+		std::cerr << std::endl << "Could not allocate curl to string, output size (current_size:" << ((std::string*)stream)->size() << "bytes + buffer:" << (size * count) << "bytes) would exceed the MAX_FILE_SIZE (" << MAX_FILE_SIZE << "bytes)";
+		return 0;
+	}
+	int retry = 0;
+	while (true)
+	{
+		try{
+			((std::string*)stream)->append((char*)ptr, 0, size*count);
+			break;// successful
+		}
+		catch (const std::bad_alloc&) {
+			retry++;
+			if (retry>100)
+			{
+				std::cerr << std::endl << "Could not allocate curl to string, probably not enough memory, aborting after : " << retry << " tries at 10s apart";
+				return 0;
+			}
+			std::cerr << std::endl << "Could not allocate curl to string, probably not enough memory, sleeping 10s, try:" << retry;
+			Sleep(10);
+		}
+	}
+	return size*count;
+}
+
+void loadExchangeRates()
+{
+	std::string url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=";
+
+	// get current date for url
+	std::time_t t = std::time(nullptr);
+	std::tm current_tm;
+	char mbstr[11]; // DD.MM.YYYY
+
+	errno_t err = localtime_s(&current_tm, &t);
+	if (!err)
+	{
+		if (std::strftime(mbstr, sizeof(mbstr), "%d.%m.%Y", &current_tm))
+		{
+			url.append(mbstr);
+
+			// download url to buffer
+
+			CURL *curl;
+			CURLcode res;
+			std::string readBuffer;
+
+			curl = curl_easy_init();
+			if (curl)
+			{
+				curl_easy_setopt(curl, CURLOPT_URL, url);
+				curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curl_to_string);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+				res = curl_easy_perform(curl);
+				curl_easy_cleanup(curl);
+			}
+
+			// parse xml
+			tinyxml2::XMLDocument doc;
+
+			/*
+			XML:
+
+			<ValCurs>
+			<Valute ID="xxxx">
+			<Valute ID="R01010">
+			<NumCode>036</NumCode>
+			<CharCode>AUD</CharCode>
+			<Nominal>1</Nominal>
+			<Name>Австралийский доллар</Name>
+			<Value>51,3999</Value>
+			</Valute>
+			...
+			</ValCurs>
+			*/
+
+			doc.Parse(readBuffer.c_str());
+
+			tinyxml2::XMLNode* xRoot = doc.RootElement();
+
+			if (xRoot == nullptr)
+			{
+				// ERROR	
+				std::cout << "Error parsing XML" << std::endl;
+			}
+			else
+			{
+				// traverse
+
+				const int spaceX = 16;
+				const int spaceY = 3;
+
+				int iX = 0;
+				int iY = 0;
+
+				LTexture iTextureNominal, iTextureCharCode, iTextureValue, iTextureFlag;
+				LTexture rubFlag;
+				SDL_Color blackColor = { 0, 0, 0 };
+				
+				for (tinyxml2::XMLElement* iElement = xRoot->FirstChildElement("Valute"); iElement != nullptr; iElement = iElement->NextSiblingElement())
+				{
+					std::string iNominal = iElement->FirstChildElement("Nominal")->GetText();
+					std::string iCharCode = iElement->FirstChildElement("CharCode")->GetText();
+					std::string iValue = iElement->FirstChildElement("Value")->GetText();
+
+					iTextureNominal.loadFromRenderedText(iNominal, blackColor);
+					iTextureNominal.render(iX, iY);
+
+					iY += spaceY;
+
+					std::cout << iNominal << " " << iCharCode << " = " << iValue << " RUB" << std::endl;
+				}
+			}
+		}
+	}
+}
+
 bool loadMedia()
 {
 	//Loading success flag
 	bool success = true;
 
 	//Open the font
-	gFont = TTF_OpenFont("files/consola.ttf", 28);
+	gFont = TTF_OpenFont("files/consola.ttf", 16);
 	if (gFont == NULL)
 	{
 		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -301,11 +426,13 @@ bool loadMedia()
 	{
 		//Render text
 		SDL_Color textColor = { 0, 0, 0 };
-		if (!gTextTexture.loadFromRenderedText("Click anywhere inside the window", textColor))
+		if (!gTextTexture.loadFromRenderedText("test", textColor))
 		{
 			printf("Failed to render text texture!\n");
 			success = false;
 		}
+
+		loadExchangeRates();
 	}
 
 	return success;
@@ -330,18 +457,6 @@ void close()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
-}
-
-static size_t CurlWriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-	((std::string*)userp)->append((char*)contents, size * nmemb);
-	return size * nmemb;
-}
-
-void loadExchangeRates()
-{
-	CURL curl;
-
 }
 
 int main(int argc, char* args[])
@@ -376,11 +491,6 @@ int main(int argc, char* args[])
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
-					}
-
-					if (e.type == SDL_MOUSEBUTTONDOWN)
-					{
-						loadExchangeRates();
 					}
 				}
 

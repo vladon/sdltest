@@ -41,7 +41,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <NuGetPackageImportStamp>ef1be986</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>e6e21457</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>D:\Dev\SDL\include;X:\Dev\SDL\include;$(IncludePath)</IncludePath>
@@ -86,6 +86,7 @@
     <Import Project="..\packages\sdl2.2.0.3\build\native\sdl2.targets" Condition="Exists('..\packages\sdl2.2.0.3\build\native\sdl2.targets')" />
     <Import Project="..\packages\tinyxml2.redist.2.1.0\build\native\tinyxml2.redist.targets" Condition="Exists('..\packages\tinyxml2.redist.2.1.0\build\native\tinyxml2.redist.targets')" />
     <Import Project="..\packages\tinyxml2.2.1.0\build\native\tinyxml2.targets" Condition="Exists('..\packages\tinyxml2.2.1.0\build\native\tinyxml2.targets')" />
+    <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
     <Import Project="..\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets" Condition="Exists('..\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets')" />
     <Import Project="..\packages\zlib.1.2.8.1\build\native\zlib.targets" Condition="Exists('..\packages\zlib.1.2.8.1\build\native\zlib.targets')" />
     <Import Project="..\packages\openssl.redist.1.0.1.25\build\native\openssl.redist.targets" Condition="Exists('..\packages\openssl.redist.1.0.1.25\build\native\openssl.redist.targets')" />
@@ -94,10 +95,6 @@
     <Import Project="..\packages\libssh2.1.4.3.1\build\native\libssh2.targets" Condition="Exists('..\packages\libssh2.1.4.3.1\build\native\libssh2.targets')" />
     <Import Project="..\packages\curl.redist.7.30.0.2\build\native\curl.redist.targets" Condition="Exists('..\packages\curl.redist.7.30.0.2\build\native\curl.redist.targets')" />
     <Import Project="..\packages\curl.7.30.0.2\build\native\curl.targets" Condition="Exists('..\packages\curl.7.30.0.2\build\native\curl.targets')" />
-    <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-    <Import Project="..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets" Condition="Exists('..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets')" />
-    <Import Project="..\packages\curlpp.0.7.3.1\build\native\curlpp.targets" Condition="Exists('..\packages\curlpp.0.7.3.1\build\native\curlpp.targets')" />
-    <Import Project="..\packages\boost.1.57.0.0\build\native\boost.targets" Condition="Exists('..\packages\boost.1.57.0.0\build\native\boost.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -107,6 +104,7 @@
     <Error Condition="!Exists('..\packages\sdl2.2.0.3\build\native\sdl2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.2.0.3\build\native\sdl2.targets'))" />
     <Error Condition="!Exists('..\packages\tinyxml2.redist.2.1.0\build\native\tinyxml2.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\tinyxml2.redist.2.1.0\build\native\tinyxml2.redist.targets'))" />
     <Error Condition="!Exists('..\packages\tinyxml2.2.1.0\build\native\tinyxml2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\tinyxml2.2.1.0\build\native\tinyxml2.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets'))" />
     <Error Condition="!Exists('..\packages\zlib.1.2.8.1\build\native\zlib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.1.2.8.1\build\native\zlib.targets'))" />
     <Error Condition="!Exists('..\packages\openssl.redist.1.0.1.25\build\native\openssl.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\openssl.redist.1.0.1.25\build\native\openssl.redist.targets'))" />
@@ -116,9 +114,5 @@
     <Error Condition="!Exists('..\packages\libssh2.1.4.3.1\build\native\libssh2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libssh2.1.4.3.1\build\native\libssh2.targets'))" />
     <Error Condition="!Exists('..\packages\curl.redist.7.30.0.2\build\native\curl.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curl.redist.7.30.0.2\build\native\curl.redist.targets'))" />
     <Error Condition="!Exists('..\packages\curl.7.30.0.2\build\native\curl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curl.7.30.0.2\build\native\curl.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curlpp.redist.0.7.3.1\build\native\curlpp.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\curlpp.0.7.3.1\build\native\curlpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\curlpp.0.7.3.1\build\native\curlpp.targets'))" />
-    <Error Condition="!Exists('..\packages\boost.1.57.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.57.0.0\build\native\boost.targets'))" />
   </Target>
 </Project>
