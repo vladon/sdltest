@@ -2,6 +2,7 @@
 #define _SDLTEST2_H_
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 class SDLTest2 { 
 	private:
