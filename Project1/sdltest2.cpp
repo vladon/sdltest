@@ -5,6 +5,9 @@ SDLTest2 SDLTest2::Instance;
 SDLTest2::SDLTest2() {
 	Window = NULL;
 	Renderer = NULL;
+	PrimarySurface = NULL;
+	Surf_Display = NULL;
+	Surf_Test = NULL;
 
 	Running = true;
 }

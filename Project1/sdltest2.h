@@ -1,6 +1,4 @@
-#ifndef _SDLTEST2_H_
-#define _SDLTEST2_H_
-
+#pragma once
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -13,6 +11,9 @@ class SDLTest2 {
 		SDL_Window* Window;
 		SDL_Renderer* Renderer;
 		SDL_Surface* PrimarySurface;
+
+		SDL_Surface* Surf_Display;
+		SDL_Surface* Surf_Test;
 
 		static const int WindowWidth = 600;
 		static const int WindowHeight = 800;
@@ -39,5 +40,3 @@ class SDLTest2 {
 		static int GetWindowWidth();
 		static int GetWindowHeight();
 };
-
-#endif

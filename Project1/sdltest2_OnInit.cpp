@@ -1,4 +1,5 @@
 #include "sdltest2.h"
+#include "CSurface.h"
 
 bool SDLTest2::OnInit() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -20,6 +21,10 @@ bool SDLTest2::OnInit() {
 	}
 
 	SDL_SetRenderDrawColor(Renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+	if ((Surf_Test = CSurface::OnLoad("files/flags/AMD.bmp")) == NULL) {
+		return false;
+	}
 
 	return true;
 }

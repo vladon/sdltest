@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0F1B05
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdltest2", "Project1\Project1.vcxproj", "{D92A3877-B750-4A77-8D69-D200D88F0F55}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdltest3", "Project2\Project2.vcxproj", "{5FD7C243-1DC3-4905-A456-95EEB766664E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -30,10 +28,6 @@ Global
 		{D92A3877-B750-4A77-8D69-D200D88F0F55}.Debug|Win32.Build.0 = Debug|Win32
 		{D92A3877-B750-4A77-8D69-D200D88F0F55}.Release|Win32.ActiveCfg = Release|Win32
 		{D92A3877-B750-4A77-8D69-D200D88F0F55}.Release|Win32.Build.0 = Release|Win32
-		{5FD7C243-1DC3-4905-A456-95EEB766664E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5FD7C243-1DC3-4905-A456-95EEB766664E}.Debug|Win32.Build.0 = Debug|Win32
-		{5FD7C243-1DC3-4905-A456-95EEB766664E}.Release|Win32.ActiveCfg = Release|Win32
-		{5FD7C243-1DC3-4905-A456-95EEB766664E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
