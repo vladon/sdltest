@@ -1,6 +1,9 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <string>
+#include <vector>
+#include "CValuteEntry.h"
 
 class SDLTest2 { 
 	private:
@@ -14,6 +17,12 @@ class SDLTest2 {
 
 		static const int WindowWidth = 600;
 		static const int WindowHeight = 800;
+
+		// Valutes
+		std::vector<CValuteEntry> ValuteEntries;
+
+	private:
+		void LoadExchangeRates();
 
 	public:
 		SDLTest2();
@@ -36,6 +45,4 @@ class SDLTest2 {
 
 		static int GetWindowWidth();
 		static int GetWindowHeight();
-
-		void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend);
 };

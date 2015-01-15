@@ -1,4 +1,5 @@
 #include "sdltest2.h"
+#include "CValuteEntry.h"
 
 bool SDLTest2::OnInit() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {

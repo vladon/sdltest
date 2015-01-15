@@ -33,9 +33,18 @@
     <ClCompile Include="sdltest2_OnCleanup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CValuteEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdltest2_LoadExchangeRates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdltest2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CValuteEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
