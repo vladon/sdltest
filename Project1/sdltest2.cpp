@@ -6,8 +6,6 @@ SDLTest2::SDLTest2() {
 	Window = NULL;
 	Renderer = NULL;
 	PrimarySurface = NULL;
-	Surf_Display = NULL;
-	Surf_Test = NULL;
 
 	Running = true;
 }
@@ -33,6 +31,15 @@ int SDLTest2::OnExecute(int argc, char* args[]) {
 	OnCleanup();
 
 	return 0;
+}
+
+void SDLTest2::ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend) {
+	SDL_Rect pos;
+	pos.x = x;
+	pos.y = y;
+
+	SDL_QueryTexture(tex, NULL, NULL, &pos.w, &pos.h);
+	SDL_RenderCopy(Renderer, tex, NULL, &pos);
 }
 
 SDLTest2* SDLTest2::GetInstance() {

@@ -12,9 +12,6 @@ class SDLTest2 {
 		SDL_Renderer* Renderer;
 		SDL_Surface* PrimarySurface;
 
-		SDL_Surface* Surf_Display;
-		SDL_Surface* Surf_Test;
-
 		static const int WindowWidth = 600;
 		static const int WindowHeight = 800;
 
@@ -39,4 +36,6 @@ class SDLTest2 {
 
 		static int GetWindowWidth();
 		static int GetWindowHeight();
+
+		void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend);
 };

@@ -33,14 +33,8 @@
     <ClCompile Include="sdltest2_OnCleanup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CSurface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CSurface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sdltest2.h">
       <Filter>Header Files</Filter>
     </ClInclude>

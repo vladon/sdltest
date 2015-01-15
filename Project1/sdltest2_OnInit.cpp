@@ -1,5 +1,4 @@
 #include "sdltest2.h"
-#include "CSurface.h"
 
 bool SDLTest2::OnInit() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -22,9 +21,21 @@ bool SDLTest2::OnInit() {
 
 	SDL_SetRenderDrawColor(Renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-	if ((Surf_Test = CSurface::OnLoad("files/flags/AMD.bmp")) == NULL) {
+
+	// load test bmp
+	SDL_Surface* bmp = nullptr;
+	if ((bmp = SDL_LoadBMP("files/flags/AMD.bmp")) == nullptr) {
 		return false;
 	}
+
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(Renderer, bmp);
+	SDL_FreeSurface(bmp);
+
+	if (tex == nullptr) {
+		return false;
+	}
+	SDL_RenderCopy(Renderer, tex, NULL, NULL);
+
 
 	return true;
 }

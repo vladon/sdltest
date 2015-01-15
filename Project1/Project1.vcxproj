@@ -75,7 +75,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CSurface.cpp" />
     <ClCompile Include="sdltest2.cpp" />
     <ClCompile Include="sdltest2_OnCleanup.cpp" />
     <ClCompile Include="sdltest2_OnEvent.cpp" />
@@ -84,7 +83,6 @@
     <ClCompile Include="sdltest2_OnRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CSurface.h" />
     <ClInclude Include="sdltest2.h" />
   </ItemGroup>
   <ItemGroup>

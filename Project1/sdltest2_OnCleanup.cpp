@@ -16,15 +16,5 @@ void SDLTest2::OnCleanup() {
 		PrimarySurface = NULL;
 	}
 
-	if (Surf_Display) {
-		SDL_FreeSurface(Surf_Display);
-		Surf_Display = NULL;
-	}
-
-	if (Surf_Test) {
-		SDL_FreeSurface(Surf_Test);
-		Surf_Test = NULL;
-	}
-
 	SDL_Quit();
 }
