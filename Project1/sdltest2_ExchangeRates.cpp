@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <string>
 #include <iomanip>
+#include <iostream>
 #include <curl/curl.h>
 #include <curl/easy.h>
 #include <tinyxml2.h>
@@ -34,8 +35,12 @@ size_t curl_to_string(void *ptr, size_t size, size_t count, void *stream)
 	return size*count;
 }
 
-void loadExchangeRates()
+void SDLTest2::LoadExchangeRates()
 {
+#ifdef DEBUG
+	std::cout << "Entered LoadExchangeRates" << std::endl;
+#endif
+
 	std::string url = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=";
 
 	// get current date for url
@@ -114,9 +119,37 @@ void loadExchangeRates()
 
 					iY += spaceY;
 
-//					std::cout << iNominal << " " << iCharCode << " = " << iValue << " RUB" << std::endl;
+					CValuteEntry* iValuteEntry = new CValuteEntry(iNominal, iCharCode, iValue);
+					ValuteEntries.push_back(iValuteEntry);
 				}
 			}
 		}
 	}
+}
+
+void SDLTest2::PostExchangeRates() {
+	CURL *curl;
+	CURLcode res;
+
+	curl_global_init(CURL_GLOBAL_ALL);
+
+	curl = curl_easy_init();
+
+	if (curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, POST_URL);
+		curl_easy_setopt(curl, CURLOPT_POST, 1);
+
+		std::string postfields;
+
+		for (auto &i : ValuteEntries) {
+			postfields = "charcode=" + i->CharCode + "&nominal=" + i->Nominal + "&value=" + i->Value;
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postfields);
+
+			res = curl_easy_perform(curl);
+		}
+
+		curl_easy_cleanup(curl);
+	}
+
+	curl_global_cleanup();
 }

@@ -36,7 +36,7 @@
     <ClCompile Include="CValuteEntry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sdltest2_LoadExchangeRates.cpp">
+    <ClCompile Include="sdltest2_ExchangeRates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,7 +6,14 @@ bool SDLTest2::OnInit() {
 		return false;
 	}
 
-	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
+	// SDL_image init
+	int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) && imgFlags)) {
+		return false;
+	}
+
+	// SDL_ttf init
+	if (TTF_Init() == -1) {
 		return false;
 	}
 
@@ -16,27 +23,10 @@ bool SDLTest2::OnInit() {
 
 	PrimarySurface = SDL_GetWindowSurface(Window);
 
-	if ((Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)) == NULL) {
-		return false;
-	}
+	SDL_FillRect(PrimarySurface, NULL, SDL_MapRGB(PrimarySurface->format, 0xFF, 0xFF, 0xFF));
 
-	SDL_SetRenderDrawColor(Renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-
-	// load test bmp
-	SDL_Surface* bmp = nullptr;
-	if ((bmp = SDL_LoadBMP("files/flags/AMD.bmp")) == nullptr) {
-		return false;
-	}
-
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(Renderer, bmp);
-	SDL_FreeSurface(bmp);
-
-	if (tex == nullptr) {
-		return false;
-	}
-	SDL_RenderCopy(Renderer, tex, NULL, NULL);
-
+	LoadExchangeRates();
+	PostExchangeRates();
 
 	return true;
 }

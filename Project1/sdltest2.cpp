@@ -1,14 +1,17 @@
 #include "sdltest2.h"
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 SDLTest2 SDLTest2::Instance;
 
 SDLTest2::SDLTest2() {
 	Window = nullptr;
-	Renderer = nullptr;
 	PrimarySurface = nullptr;
+	Font = nullptr;
 
 	Running = true;
+
+	ValuteEntries.clear();
 }
 
 int SDLTest2::OnExecute(int argc, char* args[]) {

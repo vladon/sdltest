@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <string>
 
 class CValuteEntry
@@ -14,7 +15,8 @@ public:
 	std::string CharCode;
 	std::string Value;
 
-	SDL_Rect flag_rect;
-	SDL_Texture* flag_texture;
+	TTF_Font* Font;
+
+	SDL_Surface* Line;
 };
 
